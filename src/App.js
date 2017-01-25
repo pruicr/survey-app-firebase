@@ -16,6 +16,7 @@ class App extends Component {
       },
       submitted: false
     }
+    this.handleQuestionChange = this.handleQuestionChange.bind(this)
   }
 
   handleNameSubmit(e) {
@@ -26,14 +27,70 @@ class App extends Component {
     e.preventDefault()
   }
 
+  handleQuestionSubmit(e) {
+
+  }
+
+  handleQuestionChange(e) {
+    const answers = this.state.answers
+    if(e.target.name === 'q1') {
+      answers.q1 = e.target.value
+    } else if(e.target.name === 'q2') {
+      answers.q2 = e.target.value
+    } else if(e.target.name === 'q3') {
+      answers.q3 = e.target.value
+    } else if(e.target.name === 'q4') {
+      answers.q4 = e.target.value
+    }
+
+    this.setState({answers}, () => {
+      console.log(this.state)
+    })
+  }
+
   render() {
     let user
     let questions
     if(this.state.name && this.state.submitted === false) {
-      user = (
-        <h2>
-          Welcome {this.state.name}
-        </h2>
+      user = <h2>Welcome {this.state.name}</h2>
+      questions = (
+        <span>
+          <h3>Survey Questions</h3>
+          <form onSubmit={this.handleQuestionSubmit.bind(this)}>
+            <div>
+              <label htmlFor="">What is your favorite operating system?</label><br/>
+              <input type="radio" name="q1" value="Windows" onChange={this.handleQuestionChange}/>Windows<br/>
+              <input type="radio" name="q1" value="OSX" onChange={this.handleQuestionChange}/>OSX<br/>
+              <input type="radio" name="q1" value="Linux" onChange={this.handleQuestionChange}/>Linux<br/>
+              <input type="radio" name="q1" value="Solaris" onChange={this.handleQuestionChange}/>Solaris<br/>
+              <input type="radio" name="q1" value="Other" onChange={this.handleQuestionChange}/>Other<br/>
+            </div>
+            <div>
+              <label htmlFor="">What is your favorite brand of TV?</label><br/>
+              <input type="radio" name="q2" value="Sony" onChange={this.handleQuestionChange}/>Sony<br/>
+              <input type="radio" name="q2" value="Samsung" onChange={this.handleQuestionChange}/>Samsung<br/>
+              <input type="radio" name="q2" value="Panasonic" onChange={this.handleQuestionChange}/>Panasonic<br/>
+              <input type="radio" name="q2" value="Vizio" onChange={this.handleQuestionChange}/>Vizio<br/>
+              <input type="radio" name="q2" value="Other" onChange={this.handleQuestionChange}/>Other<br/>
+            </div>
+            <div>
+              <label htmlFor="">What is your favorite operating smartphone brand?</label><br/>
+              <input type="radio" name="q3" value="Apple" onChange={this.handleQuestionChange}/>Apple<br/>
+              <input type="radio" name="q3" value="Samsung" onChange={this.handleQuestionChange}/>Samsung<br/>
+              <input type="radio" name="q3" value="Nexus" onChange={this.handleQuestionChange}/>Nexus<br/>
+              <input type="radio" name="q3" value="Blackberry" onChange={this.handleQuestionChange}/>Blackberry<br/>
+              <input type="radio" name="q3" value="Other" onChange={this.handleQuestionChange}/>Other<br/>
+            </div>
+            <div>
+              <label htmlFor="">What is your favorite CPU brand?</label><br/>
+              <input type="radio" name="q4" value="Intel" onChange={this.handleQuestionChange}/>Intel<br/>
+              <input type="radio" name="q4" value="AMD" onChange={this.handleQuestionChange}/>AMD<br/>
+              <input type="radio" name="q4" value="Qualcomm" onChange={this.handleQuestionChange}/>Qualcomm<br/>
+              <input type="radio" name="q4" value="NVIDIA" onChange={this.handleQuestionChange}/>NVIDIA<br/>
+              <input type="radio" name="q4" value="Other" onChange={this.handleQuestionChange}/>Other<br/>
+            </div>
+          </form>
+        </span>
       )
     } else if(!this.state.name && this.state.submitted === false) {
       user = (
@@ -55,6 +112,9 @@ class App extends Component {
         </div>
         <div className="text-center">
           {user}
+        </div>
+        <div className="container">
+          {questions}
         </div>
       </div>
     )

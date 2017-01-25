@@ -19,10 +19,20 @@ body {
   text-align: center;
 }
 
+.container {
+  width: 650px;
+  margin: auto;
+}
+
 input[type="text"] {
   padding: 4px;
   width: 350px;
   height: 30px;
   border-radius: 5px;
   border: #ccc solid 1px;
+}
+
+form div {
+  margin-bottom: 15px;
+  line-height: 2.2em;
 }
